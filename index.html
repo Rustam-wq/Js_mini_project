@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <style>
+        .user-container {
+            width: 45%;
+            margin: 1%;
+            display: inline-block;
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .user-container a {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="users-container"></div>
+<script>
+    fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(users => {
+            const usersContainer = document.getElementById('users-container');
+            users.forEach(user => {
+                const userContainer = document.createElement('div');
+                userContainer.className = 'user-container';
+                userContainer.innerHTML = `
+                        <h2>ID: ${user.id}</h2>
+                        <h3>Name: ${user.name}</h3>
+                        <a href="user_details.html?userId=${user.id}">More details</a>
+                    `;
+                usersContainer.appendChild(userContainer);
+            });
+        });
+</script>
+</body>
+</html>
